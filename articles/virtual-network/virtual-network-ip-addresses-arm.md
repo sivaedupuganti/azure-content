@@ -49,7 +49,7 @@ A public IP address needs to be associated with an [Azure VPN Gateway](vpn-gatew
 
 ### At-a-glance
 
-|Resource|Static Allocation|Dynamic Allocation|Multiple IP addresses|
+|Resource|Dynamic Allocation|Static Allocation|Multiple IP addresses|
 |---|---|---|---|
 |Virtual Machine (VM)/Network Interface Card (NIC)|Yes|No|No|
 |Load balancer front end|Yes|Yes|Yes|
@@ -77,7 +77,7 @@ A private IP address can be assigned to an [Azure Internal Load Balancer](load-b
 A private IP address can be assigned to an [Azure Application Gateway](application-gateway-introduction.md) front end, to configure it with an internal end-point not exposed to the internet, also known as Internal Load Balancer (ILB) endpoint. The behavior and allocation methods are similar to ILB described above.
 
 ### At-a-glance
-|Resource|Static Allocation|Dynamic Allocation|Multiple IP addresses|
+|Resource|Dynamic Allocation|Static Allocation|Multiple IP addresses|
 |---|---|---|---|
 |Virtual Machine (VM)/Network Interface Card (NIC)|Yes|Yes|Yes|
 |Load balancer front end|Yes|Yes|Yes|
