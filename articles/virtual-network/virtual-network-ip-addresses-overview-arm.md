@@ -71,14 +71,14 @@ You can associate a public IP address with an [Azure Load Balancer](load-balance
 You can associate a public IP address with an Azure [Application gateway](application-gateway-introduction.md), by assigning it to gateway's **front end** configuration. This public IP address serves as a load-balanced VIP. Currently, you can only assign a *dynamic* public IP address to an application gateway front end configuration. You can also assign multiple public IP addresses, which enables multi-vip scenarios.
 
 ### At-a-glance
-The table below shows each resource type with the possible allocation methods (dynamic/static), and ability to assign multiple public IP addresses.
+The table below shows the possible allocation methods (Static/Dynamic) that can be used for public IP addresses associated to each top-level resource. It also shows if multiple public IP addresses can be assigned to them.
 
 |Resource|Dynamic|Static|Multiple IP addresses|
 |---|---|---|---|
-|Network Interface Card (NIC) (of a VM)|Yes|Yes|No|
-|Load balancer front end|Yes|Yes|Yes|
+|Virtual Machine|Yes|Yes|No|
+|Load balancer|Yes|Yes|Yes (*one per front end config*)|
 |VPN gateway|Yes|No|No|
-|Application gateway front end|Yes|No|No|
+|Application gateway|Yes|No|No|
 
 ## Private IP addresses
 Private IP addresses allow Azure resources to communicate with other resources in a [virtual network](virtual-networks-overview.md)(VNet), or in on-premises network through a VPN gateway or ExpressRoute circuit, without using an Internet-reachable IP address.
@@ -116,13 +116,13 @@ VMs configured with Azure-managed DNS servers will be able to resolve the hostna
 You can assign a private IP address to the **front end** configuration of an [Azure Internal Load Balancer](load-balancer-internal-overview.md) (ILB) or an [Azure Application Gateway](application-gateway-introduction.md). This private IP address serves as an internal endpoint, accessible only to the resources within its virtual network (VNet) and the remote networks connected to the VNet. You can assign either a dynamic or static private IP address to the front end configuration. You can also assign multiple private IP addresses to enable multi-vip scenarios.
 
 ### At-a-glance
-The table below shows each resource type with the possible allocation methods (dynamic/static), and ability to assign multiple private IP addresses.
+The table below shows the possible allocation methods (Static/Dynamic) that can be used for private IP addresses associated to each top-level resource. It also shows if multiple private IP addresses can be assigned to them. 
 
 |Resource|Static|Dynamic|Multiple IP addresses|
 |---|---|---|---|
-|Virtual Machine (VM)/Network Interface Card (NIC)|Yes|Yes|Yes|
-|Internal Load balancer front end|Yes|Yes|Yes|
-|Application gateway front end|Yes|Yes|Yes|
+|Virtual Machine|Yes|Yes|Yes (*one per NIC*)|
+|Internal Load balancer|Yes|Yes|Yes (*one per front end config*)|
+|Application gateway|Yes|Yes|Yes (*one per front end config*)|
 
 ## Limits
 
@@ -144,7 +144,7 @@ In most cases, public IP addresses are free. There is a nominal charge to use ad
 In summary, the following pricing structure applies to public IP resources:
 
 - VPN gateways and application gateways use only one dynamic public IP, which is free of cost.
-- VMs use only one public IP, which is free as long as it is a dynamic IP address. If a VM uses a static public IP, it gets counted towards Static (Reserved) Public IP usage.
+- A VM can use only one public IP, which is charged at $0.004/hr. If the VM uses a static public IP, it gets counted towards Static (Reserved) Public IP usage.
 - Each load balancer can use multiple public IPs. The first public IP is free of cost. Additional dynamic IPs are charged at $0.004/hr. Static public IPs get counted towards Static (Reserved) Public IP usage.
 - Static (Reserved) Public IP usage: 
 	- First 5 (in-use) are free. Additional static public IPs are charged at $0.004/hr. 
